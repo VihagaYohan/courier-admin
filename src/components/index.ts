@@ -1,2 +1,3 @@
-export { default as UISidebar } from "./UISidebar";
-export { default as UIHeader } from "./UIHeader";
+export { default as UITypography } from "./MuiTypography";
+export { default as UIButton } from "./MuiButton";
+export { default as UITextField } from "./MuiTextfield";
