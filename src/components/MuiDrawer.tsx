@@ -66,7 +66,7 @@ const AppBar = styled(MuiAppBar, {
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -88,8 +88,6 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <CssBaseline />
-
-      <UIAppbar handleDrawer={(value) => setOpen(value)} />
 
       <Drawer
         sx={{
