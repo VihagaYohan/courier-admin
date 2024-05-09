@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import "./style.css";
 
 // components
-import { UITypography, UIButton, UITextField } from "../../components";
+import {
+  UITypography,
+  UIButton,
+  UITextField,
+  UILayout,
+} from "../../components";
 
 // pages
 import Dashboard from "../Dashboard/dashboard-page";
@@ -12,7 +17,8 @@ const HomePage = () => {
     <div className="grid-container">
       {/* <UITypography /> */}
       {/* <UIButton /> */}
-      <UITextField />
+      {/* <UITextField /> */}
+      <UILayout />
     </div>
   );
 };
