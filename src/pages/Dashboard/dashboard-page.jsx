@@ -1,8 +1,15 @@
 import React from "react";
 import "./style.css";
 
+// components
+import { UIAppbar, UIDrawer } from "../../components";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <UIDrawer />
+    </div>
+  );
 };
 
 export default Dashboard;
