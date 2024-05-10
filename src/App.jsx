@@ -1,26 +1,33 @@
-import "./App.css";
-import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
 
-// pages
-import { ErrorPage, HomePage, Dashboard } from "./pages";
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, StyledEngineProvider } from '@mui/material';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-    errorElement: <ErrorPage />,
-  },
-]);
+// routing
+import router from 'routes';
 
-function App() {
-  return <RouterProvider router={router} />;
-}
+// defaultTheme
+import themes from 'themes';
+
+// project imports
+import NavigationScroll from 'layout/NavigationScroll';
+
+// ==============================|| APP ||============================== //
+
+const App = () => {
+  const customization = useSelector((state) => state.customization);
+
+  return (
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={themes(customization)}>
+        <CssBaseline />
+        <NavigationScroll>
+          <RouterProvider router={router} />
+        </NavigationScroll>
+      </ThemeProvider>
+    </StyledEngineProvider>
+  );
+};
 
 export default App;
