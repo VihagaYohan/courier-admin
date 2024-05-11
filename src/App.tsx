@@ -4,6 +4,9 @@ import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 // pages
 import { Home, Orders, Users } from "./pages";
 
+// layout
+import { Dashboard } from "./layout";
+
 // routes
 import Routes from "routes/Routes";
 
@@ -11,15 +14,21 @@ function App() {
   const routers = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
-    },
-    {
-      path: Routes.orders,
-      element: <Orders />,
-    },
-    {
-      path: Routes.users,
-      element: <Users />,
+      element: <Dashboard />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/users",
+          element: <Users />,
+        },
+        {
+          path: "/orders",
+          element: <Orders />,
+        },
+      ],
     },
   ]);
 
