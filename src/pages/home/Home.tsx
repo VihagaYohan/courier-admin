@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./home.scss";
 
 // layout
-import { RecentOrders, ChartBox } from "../../layout";
+import { RecentOrders, ChartBox, BarChart } from "../../layout";
 
 const Home = () => {
   return (
@@ -23,7 +23,9 @@ const Home = () => {
       <div className="box box6">
         <ChartBox title="Total Earnings" count={100} />
       </div>
-      <div className="box box7">Box7</div>
+      <div className="box box7">
+        <BarChart />
+      </div>
       {/*  <div className="box box8">Box8</div>
       <div className="box box9">Box9</div> */}
     </div>
