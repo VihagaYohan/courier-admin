@@ -1,3 +1,4 @@
+@import "../../styles/variables.scss";
 @import "../../styles/responsive.scss";
 
 .navbar {
@@ -11,7 +12,13 @@
     display: flex;
     align-items: center;
     font-weight: bold;
-    gap: 10px;
+    gap: 50px;
+
+    span {
+      color: $primary-color;
+      font-weight: 600;
+      font-size: 32px;
+    }
   }
 
   .icons {
@@ -33,6 +40,12 @@
         height: 26px;
         border-radius: 50%;
         object-fit: cover;
+      }
+
+      span {
+        color: $primary-color;
+        font-weight: 400;
+        font-size: 20px;
       }
     }
   }
