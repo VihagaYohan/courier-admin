@@ -28,7 +28,6 @@ a {
 .menuContainer {
   width: 250px;
   padding: 5px 20px;
-  border-right: 2px solid $soft-bg;
 
   @include lg {
     width: max-content;
@@ -36,6 +35,8 @@ a {
 }
 
 .contentContainer {
-  padding: 5px 20px;
+  padding: 20px 20px;
   width: 100%;
+  background-color: rgb(239, 242, 246);
+  border-radius: 10px;
 }
