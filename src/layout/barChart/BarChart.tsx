@@ -22,6 +22,7 @@ const data = {
 const BarChart = () => {
   return (
     <div>
+      <h1>Courier Orders</h1>
       <Chart
         options={data.options}
         series={data.series}

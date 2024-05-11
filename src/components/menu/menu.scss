@@ -11,7 +11,7 @@
     .title {
       font-size: 12px;
       font-weight: 200;
-      color: $soft-color;
+      color: $main-bg;
       text-transform: uppercase;
 
       @include lg {
@@ -27,14 +27,24 @@
       border-radius: 5px;
 
       &:hover {
-        background-color: $soft-bg;
+        background-color: $primary-color;
       }
 
       .listItemTitle {
+        color: $main-bg;
+
+        &:hover {
+          color: white;
+        }
+
         @include lg {
           display: none;
         }
       }
+    }
+
+    .itemIcon {
+      background-color: $main-bg;
     }
   }
 }

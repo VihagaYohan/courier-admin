@@ -1,6 +1,9 @@
+@import "../../styles/variables.scss";
 .recentOrders {
-  .h1 {
+  h1 {
     margin-bottom: 20px;
+    color: $main-bg;
+    text-align: center;
   }
 
   .list {
@@ -25,6 +28,7 @@
           display: flex;
           flex-direction: column;
           gap: 5px;
+          color: $main-bg;
 
           .username {
             font-size: 14px;
@@ -39,6 +43,7 @@
 
       .amount {
         font-weight: 500;
+        color: $main-bg;
       }
     }
   }

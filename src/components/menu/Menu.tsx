@@ -17,7 +17,7 @@ const Navbar = () => {
               className="listItem"
               key={`item ${listItem.id}`}
             >
-              <img src={listItem.icon} alt="" />
+              <img src={listItem.icon} alt="" className="itemIcon" />
               <span className="listItemTitle">{listItem.title}</span>
             </Link>
           ))}
