@@ -5,6 +5,9 @@ import "./users.scss";
 // components
 import { DataTable } from "../../components";
 
+// local data
+import { userRows } from "../../data/data";
+
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
   {
@@ -33,19 +36,6 @@ const columns: GridColDef[] = [
     width: 160,
     valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
   },
-  {
-    field: "actions",
-    headerName: "Actions",
-    width: 100,
-    renderCell: (params) => {
-      return (
-        <div className="action">
-          <div className="view">View</div>
-          <div className="delete">Delete</div>
-        </div>
-      );
-    },
-  },
 ];
 
 const rows = [
@@ -69,7 +59,7 @@ const Home = () => {
         <button>Add new user</button>
       </div>
 
-      <DataTable columns={columns} rows={rows} />
+      <DataTable columns={columns} rows={userRows} slug="users" />
     </div>
   );
 };
