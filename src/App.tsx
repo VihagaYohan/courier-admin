@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 // pages
 import { Home, Orders, Users, Login } from "./pages";
@@ -11,6 +12,14 @@ import { Dashboard } from "./layout";
 import Routes from "routes/Routes";
 
 import "./styles/global.scss";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#57bf82",
+    },
+  },
+});
 
 function App() {
   const routers = createBrowserRouter([
@@ -38,7 +47,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={routers} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={routers} />
+    </ThemeProvider>
+  );
 }
 
 export default App;
