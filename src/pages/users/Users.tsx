@@ -3,7 +3,7 @@ import { GridColDef } from "@mui/x-data-grid";
 import "./users.scss";
 
 // components
-import { DataTable } from "../../components";
+import { DataTable, Button } from "../../components";
 
 // local data
 import { userRows } from "../../data/data";
@@ -56,7 +56,14 @@ const Home = () => {
       <div className="info">
         <h1>Users</h1>
 
-        <button>Add new user</button>
+        <Button
+          variant="primary"
+          onClick={() => {
+            return;
+          }}
+        >
+          Click Me
+        </Button>
       </div>
 
       <DataTable columns={columns} rows={userRows} slug="users" />
