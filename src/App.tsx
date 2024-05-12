@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Provider } from "react-redux";
 
 // pages
 import { Home, Orders, Users, Login } from "./pages";
@@ -10,6 +11,9 @@ import { Dashboard } from "./layout";
 
 // routes
 import Routes from "routes/Routes";
+
+// redux
+import store from "./store/store";
 
 import "./styles/global.scss";
 
@@ -49,7 +53,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RouterProvider router={routers} />
+      <Provider store={store}>
+        <RouterProvider router={routers} />
+      </Provider>
     </ThemeProvider>
   );
 }
