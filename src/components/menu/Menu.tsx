@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./menu.scss";
 
+// components
+import { MenuItem } from "../";
+
 // data
 import { menu } from "../../data/data";
+
+import { Icons } from "../../constants";
 
 const Navbar = () => {
   return (
@@ -12,14 +17,12 @@ const Navbar = () => {
         <div className="item" key={item.id}>
           <span className="title">{item.title}</span>
           {item.listItems.map((listItem) => (
-            <Link
-              to={listItem.url}
-              className="listItem"
-              key={`item ${listItem.id}`}
-            >
-              <img src={listItem.icon} alt="" className="itemIcon" />
-              <span className="listItemTitle">{listItem.title}</span>
-            </Link>
+            <MenuItem
+              id={listItem.id}
+              title={listItem.title}
+              url={listItem.url}
+              icon={listItem.icon}
+            />
           ))}
         </div>
       ))}

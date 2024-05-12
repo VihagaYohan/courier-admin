@@ -1,3 +1,5 @@
+import { Icons } from "../constants";
+
 export const menu = [
   {
     id: 1,
@@ -7,7 +9,7 @@ export const menu = [
         id: 1,
         title: "Homepage",
         url: "/",
-        icon: "home.svg",
+        icon: Icons.HomeRounded,
       },
     ],
   },
@@ -19,19 +21,19 @@ export const menu = [
         id: 1,
         title: "Users",
         url: "/users",
-        icon: "user.svg",
+        icon: Icons.PeopleAltRounded,
       },
       {
         id: 2,
         title: "Orders",
         url: "/orders",
-        icon: "order.svg",
+        icon: Icons.LocalShippingRounded,
       },
       {
         id: 3,
         title: "Types",
         url: "/types",
-        icon: "order.svg",
+        icon: Icons.MergeTypeRounded,
       },
     ],
   },
@@ -43,7 +45,7 @@ export const menu = [
         id: 1,
         title: "Orders",
         url: "/",
-        icon: "element.svg",
+        icon: Icons.AssessmentRounded,
       },
     ],
   },
