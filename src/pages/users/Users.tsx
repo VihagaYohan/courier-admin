@@ -1,5 +1,8 @@
 import React, { Component, useState, useEffect } from "react";
 import { GridColDef } from "@mui/x-data-grid";
+import { Dialog, DialogTitle, TextField } from "@mui/material";
+import { Select, Option } from "@mui/base";
+import { Formik } from "formik";
 import "./users.scss";
 
 // components
@@ -16,6 +19,7 @@ import { startLoading, stopLoading } from "../../store/slice/loaderSlice";
 import { UserService } from "../../services";
 import { UserTable } from "models";
 
+// table columns
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
   { field: "email", headerName: "Email", width: 200 },
@@ -26,6 +30,7 @@ const Home = () => {
   const dispatch = useAppDispatch();
   const { loadingState } = useAppSelector((state) => state.loader);
   const [users, setUsers] = useState<UserTable[]>([]);
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchAllUsers();
@@ -52,7 +57,7 @@ const Home = () => {
         <Button
           variant="primary"
           onClick={() => {
-            return;
+            setOpen(true);
           }}
         >
           Click Me
@@ -64,6 +69,91 @@ const Home = () => {
       ) : (
         <ActivityLoader />
       )}
+
+      <Dialog
+        onClose={() => {
+          console.log("close");
+        }}
+        open={open}
+      >
+        <DialogTitle>Create new user</DialogTitle>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          validate={(values) => {
+            console.log(values);
+          }}
+          onSubmit={(values) => {
+            console.log(values);
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            /* and other goodies */
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "20px",
+                }}
+              >
+                <TextField
+                  label="Name"
+                  variant="outlined"
+                  size="small"
+                  error={false}
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                />
+
+                <TextField
+                  label="Email"
+                  variant="outlined"
+                  size="small"
+                  error={false}
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                />
+
+                <TextField
+                  label="Phone number"
+                  variant="outlined"
+                  size="small"
+                  type="number"
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                />
+
+                <Select>
+                  <Option value="rider">Rider</Option>
+                </Select>
+
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                />
+                {errors.password && touched.password && errors.password}
+                <button type="submit" disabled={isSubmitting}>
+                  Submit
+                </button>
+              </div>
+            </form>
+          )}
+        </Formik>
+      </Dialog>
     </div>
   );
 };
