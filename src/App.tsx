@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Provider } from "react-redux";
+import { Toaster } from "react-hot-toast";
 
 // pages
 import { Home, Orders, Users, Login } from "./pages";
@@ -52,11 +53,25 @@ function App() {
   ]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <RouterProvider router={routers} />
-      </Provider>
-    </ThemeProvider>
+    <div>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <RouterProvider router={routers} />
+        </Provider>
+      </ThemeProvider>
+
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        toastOptions={{
+          duration: 5000,
+          success: {
+            duration: 5000,
+          },
+        }}
+      />
+    </div>
   );
 }
 

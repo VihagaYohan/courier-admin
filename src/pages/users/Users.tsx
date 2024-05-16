@@ -14,6 +14,9 @@ import {
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import CheckIcon from "@mui/icons-material/Check";
+import RemoveIcon from "@mui/icons-material/Close";
+// import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import "./users.scss";
 
 // components
@@ -61,6 +64,8 @@ const Home = () => {
   const [open, setOpen] = useState<boolean>(false);
   //const [role, setRole] = useState<String>("");
 
+  const notify = () => toast.success(" User has been added");
+
   const handleChange = (event) => {
     //setRole(event.target.value.toString());
   };
@@ -86,9 +91,8 @@ const Home = () => {
   const handleAddUser = async (payload: payloadInterface) => {
     try {
       let response = await UserService.addUser(payload);
-      <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-        User has been added
-      </Alert>;
+      notify();
+      fetchAllUsers();
       setOpen(false);
     } catch (e) {
       console.log(e);
@@ -99,7 +103,6 @@ const Home = () => {
     <div className="users">
       <div className="info">
         <h1>Users</h1>
-
         <Button
           variant="primary"
           onClick={() => {
@@ -116,6 +119,7 @@ const Home = () => {
         <ActivityLoader />
       )}
 
+      {/* add new record (user) */}
       <Dialog
         onClose={() => {
           console.log("close");
@@ -125,7 +129,19 @@ const Home = () => {
           padding: "10px",
         }}
       >
-        <DialogTitle>Add new user</DialogTitle>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingRight: "10px",
+          }}
+          onClick={() => setOpen(false)}
+        >
+          <DialogTitle>Add new user</DialogTitle>
+          <RemoveIcon fontSize="inherit" />
+        </div>
         <Formik
           initialValues={{
             name: "",

@@ -5,8 +5,14 @@ import {
   renderActionsCell,
   GridColDef,
 } from "@mui/x-data-grid";
+import { Alert } from "@mui/material";
 import "./dataTable.scss";
 import { Link } from "react-router-dom";
+import CheckIcon from "@mui/icons-material/Check";
+import toast, { Toaster } from "react-hot-toast";
+
+// service
+import { UserService } from "services";
 
 interface propTypes {
   columns: GridColDef[];
@@ -15,6 +21,22 @@ interface propTypes {
 }
 
 const DataTable = ({ columns, rows, slug }: propTypes) => {
+  const notify = () => toast.success(" Record has been added");
+
+  // handle delete record
+  const handleDelete = async (slug: string, id: string) => {
+    try {
+      if (slug == "users") {
+        // remove user
+        await UserService.removeUser(id);
+      }
+
+      notify();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const actionColumn: GridColDef = {
     field: "action",
     headerName: "Action",
@@ -23,10 +45,17 @@ const DataTable = ({ columns, rows, slug }: propTypes) => {
       return (
         <div className="action">
           <Link to={`/${slug}/${params.row.id}`}>
-            <img src="/view.svg" alt="view" />
+            <img
+              src="/view.svg"
+              alt="view"
+              onClick={() => console.log("view")}
+            />
           </Link>
 
-          <div className="delete" onClick={() => console.log("delete")}>
+          <div
+            className="delete"
+            onClick={() => handleDelete(slug, params.row.id)}
+          >
             <img src="/delete.svg" alt="delete" />
           </div>
         </div>
@@ -55,6 +84,8 @@ const DataTable = ({ columns, rows, slug }: propTypes) => {
         pageSizeOptions={[5, 10]}
         checkboxSelection
         disableDensitySelector
+        rowSelection={true}
+        disableRowSelectionOnClick
       />
     </div>
   );

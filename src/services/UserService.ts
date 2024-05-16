@@ -46,7 +46,19 @@ const addUser = async (payload: UserRequest) => {
   }
 };
 
+// delete user
+const removeUser = async (id: string) => {
+  try {
+    let response = await BaseApi.delete(`${Endpoints.deleteUser}/${id}`);
+    console.log("user delete response");
+    console.log(response);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export default {
   getAllUsers,
   addUser,
+  removeUser,
 };
