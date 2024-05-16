@@ -7,9 +7,11 @@ import {
   Select,
   MenuItem,
   FormControl,
+  Button as MuiButton,
 } from "@mui/material";
 // import { Select, Option } from "@mui/base";
-import { Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import "./users.scss";
 
 // components
@@ -25,6 +27,15 @@ import { startLoading, stopLoading } from "../../store/slice/loaderSlice";
 // service
 import { UserService } from "../../services";
 import { UserTable } from "models";
+
+// form validation
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  email: Yup.string().email("Invalid email address"),
+  phoneNumber: Yup.string().required("Phone number required"),
+  password: Yup.string().min(4).required("Password is required"),
+  userRole: Yup.string().required("User role required"),
+});
 
 // table columns
 const columns: GridColDef[] = [
@@ -87,8 +98,11 @@ const Home = () => {
           console.log("close");
         }}
         open={open}
+        style={{
+          padding: "10px",
+        }}
       >
-        <DialogTitle>Create new user</DialogTitle>
+        <DialogTitle>Add new user</DialogTitle>
         <Formik
           initialValues={{
             name: "",
@@ -97,9 +111,7 @@ const Home = () => {
             password: "",
             userRole: "rider",
           }}
-          validate={(values) => {
-            console.log(values);
-          }}
+          validationSchema={validationSchema}
           onSubmit={(values) => {
             console.log(values);
           }}
@@ -114,79 +126,108 @@ const Home = () => {
             isSubmitting,
             /* and other goodies */
           }) => (
-            <form onSubmit={handleSubmit}>
-              <div
+            <Form>
+              <TextField
+                name="name"
+                label="Name"
+                variant="outlined"
+                // as={TextField}
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={Boolean(errors.name) && touched.name}
+                helperText={touched.name && errors.name}
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "20px",
+                  marginBottom: "10px",
+                  marginRight: "10px",
+                  marginLeft: "10px",
+                }}
+              />
+
+              <TextField
+                name="phoneNumber"
+                label="Phone number"
+                variant="outlined"
+                //as={TextField}
+                value={values.phoneNumber}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={Boolean(errors.phoneNumber) && touched.phoneNumber}
+                helperText={errors.phoneNumber}
+                style={{
+                  marginBottom: "10px",
+                  marginRight: "10px",
+                }}
+              />
+              <br />
+
+              <TextField
+                name="email"
+                label="Email"
+                variant="outlined"
+                //fullWidth
+                // as={TextField}
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={Boolean(errors.email) && touched.email}
+                helperText={touched.email && errors.email}
+                style={{
+                  marginBottom: "10px",
+                  marginLeft: "10px",
+                  width: "400px",
+                }}
+              />
+
+              <br />
+              <TextField
+                name="password"
+                label="Password"
+                variant="outlined"
+                // as={TextField}
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={Boolean(errors.password) && touched.password}
+                helperText={errors.password}
+                style={{
+                  marginBottom: "10px",
+                  marginLeft: "10px",
+                }}
+              />
+
+              <TextField
+                name="userRole"
+                label="User role"
+                variant="outlined"
+                //as={TextField}
+                value={values.userRole}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={Boolean(errors.userRole) && touched.userRole}
+                helperText={errors.userRole}
+                disabled
+                style={{
+                  marginBottom: "10px",
+                  marginLeft: "10px",
+                }}
+              />
+
+              <br />
+
+              <MuiButton
+                color="primary"
+                variant="contained"
+                type="submit"
+                style={{
+                  marginLeft: "10px",
+                  width: "400px",
+                  marginBottom: "10px",
                 }}
               >
-                <TextField
-                  name="name"
-                  label="Name"
-                  variant="outlined"
-                  size="small"
-                  error={false}
-                  value="name"
-                  style={{
-                    marginBottom: "10px",
-                  }}
-                />
-
-                <TextField
-                  name="email"
-                  label="Email"
-                  variant="outlined"
-                  size="small"
-                  error={false}
-                  value="email"
-                  style={{
-                    marginBottom: "10px",
-                  }}
-                />
-
-                <TextField
-                  name="phoneNumber"
-                  label="Phone number"
-                  variant="outlined"
-                  size="small"
-                  value="phoneNumber"
-                  style={{
-                    marginBottom: "10px",
-                  }}
-                />
-
-                <Select
-                  label="User role"
-                  value="userRole"
-                  onChange={() => handleChange}
-                  size="small"
-                  name="userRole"
-                >
-                  <MenuItem value="rider">Delivery rider</MenuItem>
-                </Select>
-
-                <TextField
-                  type="password"
-                  name="password"
-                  label="Password"
-                  variant="outlined"
-                  size="small"
-                  value="password"
-                  style={{
-                    marginBottom: "10px",
-                  }}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.password && touched.password && errors.password}
-
-                <Button variant="primary" onClick={() => console.log("form")}>
-                  Submit
-                </Button>
-              </div>
-            </form>
+                Submit
+              </MuiButton>
+            </Form>
           )}
         </Formik>
       </Dialog>
