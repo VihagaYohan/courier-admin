@@ -6,3 +6,4 @@ export { default as UserRequest } from "./UserRequest";
 export { default as OrderResponse } from "./Order";
 export { default as CourierStatus } from "./CourierStatus";
 export { default as Rider } from "./Riders";
+export { default as CourierTypes } from "./CourierTypes";
