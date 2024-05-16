@@ -8,10 +8,12 @@ import {
   MenuItem,
   FormControl,
   Button as MuiButton,
+  Alert,
 } from "@mui/material";
 // import { Select, Option } from "@mui/base";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import CheckIcon from "@mui/icons-material/Check";
 import "./users.scss";
 
 // components
@@ -44,6 +46,14 @@ const columns: GridColDef[] = [
   { field: "type", headerName: "User Type", width: 80 },
 ];
 
+interface payloadInterface {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  role: string;
+}
+
 const Home = () => {
   const dispatch = useAppDispatch();
   const { loadingState } = useAppSelector((state) => state.loader);
@@ -69,6 +79,19 @@ const Home = () => {
       console.log(e);
     } finally {
       dispatch(stopLoading());
+    }
+  };
+
+  // add new user
+  const handleAddUser = async (payload: payloadInterface) => {
+    try {
+      let response = await UserService.addUser(payload);
+      <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+        User has been added
+      </Alert>;
+      setOpen(false);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -113,7 +136,14 @@ const Home = () => {
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            console.log(values);
+            let payload: payloadInterface = {
+              name: values.name,
+              email: values.email,
+              phoneNumber: values.phoneNumber,
+              password: values.password,
+              role: values.userRole,
+            };
+            handleAddUser(payload);
           }}
         >
           {({

@@ -4,7 +4,7 @@ import BaseApi from "api/Api";
 import Endpoints from "api/Endpoints";
 
 // models
-import { User, Response, UserTable } from "../models";
+import { User, Response, UserTable, UserRequest } from "../models";
 
 const getAllUsers = async () => {
   try {
@@ -35,6 +35,18 @@ const getAllUsers = async () => {
   }
 };
 
+// create new user
+const addUser = async (payload: UserRequest) => {
+  try {
+    let response = await BaseApi.post(Endpoints.addUser, payload);
+    console.log("user response");
+    console.log(response);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export default {
   getAllUsers,
+  addUser,
 };
