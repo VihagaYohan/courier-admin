@@ -68,8 +68,6 @@ const Home = () => {
     try {
       dispatch(startLoading());
       const result = await OrderService.getAllOrders();
-      console.log("order page");
-      console.log(result);
       setOrders(result);
     } catch (e) {
       console.log(e);
