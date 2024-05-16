@@ -22,7 +22,7 @@ const getAllCourierTypes = async () => {
       if (data.length > 0) {
         data.map((item) => {
           let user: CourierTypes = {
-            _id: item._id,
+            id: item._id,
             name: item.name,
             createdAt: item.createdAt,
             __v: item.__v,
@@ -42,5 +42,5 @@ const getAllCourierTypes = async () => {
 };
 
 export default {
-  getAllUsers: getAllCourierTypes,
+  getAllCourierTypes,
 };

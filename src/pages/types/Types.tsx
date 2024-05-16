@@ -30,8 +30,8 @@ import { useAppDispatch, useAppSelector } from "../../store/store";
 import { startLoading, stopLoading } from "../../store/slice/loaderSlice";
 
 // service
-import { OrderService } from "../../services";
-import { OrderTable, UserTable } from "models";
+import { CourierTypesService, OrderService } from "../../services";
+import { CourierStatus, CourierTypes, OrderTable, UserTable } from "models";
 
 // form validation
 const validationSchema = Yup.object().shape({
@@ -44,30 +44,27 @@ const validationSchema = Yup.object().shape({
 
 // table columns
 const columns: GridColDef[] = [
-  { field: "date", headerName: "Date", width: 100 },
-  { field: "trackingId", headerName: "Tracking Id", width: 100 },
-  { field: "sender", headerName: "Sender Name", width: 200 },
-  { field: "reciever", headerName: "Receiver Name", width: 200 },
-  { field: "type", headerName: "Type", width: 200 },
-  { field: "amount", headerName: "Amount (Rs.)", width: 200 },
-  { field: "method", headerName: "Payment Method", width: 150 },
+  { field: "name", headerName: "Courier Type", width: 200 },
+  { field: "createdAt", headerName: "Created At", width: 100 },
 ];
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const { loadingState } = useAppSelector((state) => state.loader);
-  const [orders, setOrders] = useState<OrderTable[]>([]);
+  const [orders, setOrders] = useState<CourierTypes[]>([]);
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchAllOrders();
+    console.log(orders);
   }, []);
 
   // fetch all orders
   const fetchAllOrders = async () => {
     try {
       dispatch(startLoading());
-      const result = await OrderService.getAllOrders();
+      const result = await CourierTypesService.getAllCourierTypes();
+      console.log(result);
       setOrders(result);
     } catch (e) {
       console.log(e);
@@ -83,7 +80,7 @@ const Home = () => {
       </div>
 
       {orders.length > 0 && loadingState == false ? (
-        <DataTable columns={columns} rows={orders} slug="orders" />
+        <DataTable columns={columns} rows={orders} slug="types" />
       ) : (
         <ActivityLoader />
       )}

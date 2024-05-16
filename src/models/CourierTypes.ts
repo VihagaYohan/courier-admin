@@ -1,5 +1,5 @@
 export interface CourierTypes {
-  _id: string;
+  id: string;
   name: string;
   createdAt: string;
   __v: number;
