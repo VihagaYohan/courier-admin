@@ -1,6 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import "./barChart.scss";
+import { OrderTable } from "models";
+import { OrderService } from "services";
+import moment from "moment";
 
 const data = {
   options: {
@@ -8,18 +11,43 @@ const data = {
       id: "basic-bar",
     },
     xaxis: {
-      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+      categories: [2022, 2023, 2024],
     },
   },
   series: [
     {
       name: "series-1",
-      data: [30, 40, 45, 50, 49, 60, 70, 91],
+      data: [1, 2, 1],
     },
   ],
 };
 
 const BarChart = () => {
+  const [orders, setOrders] = useState<OrderTable[]>([]);
+  const [years, setYears] = useState<string[]>([]);
+  useEffect(() => {
+    fetchAllOrders();
+  }, []);
+
+  // fetch all orders
+  const fetchAllOrders = async () => {
+    try {
+      let yearsList: string[] = [];
+      let seriesList: string[] = [];
+      const result = await OrderService.getAllOrders();
+      if (result.length > 0) {
+        result.map((item) => {
+          yearsList.push(moment(item.date).year().toString());
+        });
+      }
+
+      setYears([...yearsList]);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      console.log("");
+    }
+  };
   return (
     <div>
       <h1>Courier Orders</h1>

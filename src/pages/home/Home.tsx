@@ -11,17 +11,17 @@ const Home = () => {
         <RecentOrders />
       </div>
       <div className="box box2">
-        <ChartBox title="Total Orders" count={10} />
+        <ChartBox title="Total Orders" count={3} />
       </div>
       <div className="box box3">
-        <ChartBox title="Completed Orders" count={15} />
+        <ChartBox title="Completed Orders" count={1} />
       </div>
-      <div className="box box4">Box6</div>
+      {/*  <div className="box box4">Box6</div> */}
       <div className="box box5">
-        <ChartBox title="Processing" count={5} />
+        <ChartBox title="Processing" count={3} />
       </div>
       <div className="box box6">
-        <ChartBox title="Total Earnings" count={100} />
+        <ChartBox title="Total Earnings (LKR)" count={22000} />
       </div>
       <div className="box box7">
         <BarChart />

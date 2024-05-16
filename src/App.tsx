@@ -29,6 +29,10 @@ const theme = createTheme({
 function App() {
   const routers = createBrowserRouter([
     {
+      path: "/login",
+      element: <Login />,
+    },
+    {
       path: "/",
       element: <Dashboard />,
       children: [
@@ -53,10 +57,6 @@ function App() {
           element: <Reports />,
         },
       ],
-    },
-    {
-      path: "/login",
-      element: <Login />,
     },
   ]);
 

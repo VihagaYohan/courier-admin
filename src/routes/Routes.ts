@@ -4,6 +4,7 @@ const Routes = {
   users: "/users",
   type: "/types",
   reports: "/reports",
+  login: "/login",
 };
 
 export default Routes;
