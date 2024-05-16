@@ -44,13 +44,13 @@ const DataTable = ({ columns, rows, slug }: propTypes) => {
     renderCell: (params) => {
       return (
         <div className="action">
-          <Link to={`/${slug}/${params.row.id}`}>
+          {/* <Link to={`/${slug}/${params.row.id}`}>
             <img
               src="/view.svg"
               alt="view"
               onClick={() => console.log("view")}
             />
-          </Link>
+          </Link> */}
 
           <div
             className="delete"
