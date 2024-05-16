@@ -1,7 +1,14 @@
 import React, { Component, useState, useEffect } from "react";
 import { GridColDef } from "@mui/x-data-grid";
-import { Dialog, DialogTitle, TextField } from "@mui/material";
-import { Select, Option } from "@mui/base";
+import {
+  Dialog,
+  DialogTitle,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+} from "@mui/material";
+// import { Select, Option } from "@mui/base";
 import { Formik } from "formik";
 import "./users.scss";
 
@@ -31,6 +38,11 @@ const Home = () => {
   const { loadingState } = useAppSelector((state) => state.loader);
   const [users, setUsers] = useState<UserTable[]>([]);
   const [open, setOpen] = useState<boolean>(false);
+  //const [role, setRole] = useState<String>("");
+
+  const handleChange = (event) => {
+    //setRole(event.target.value.toString());
+  };
 
   useEffect(() => {
     fetchAllUsers();
@@ -60,7 +72,7 @@ const Home = () => {
             setOpen(true);
           }}
         >
-          Click Me
+          New User
         </Button>
       </div>
 
@@ -78,7 +90,13 @@ const Home = () => {
       >
         <DialogTitle>Create new user</DialogTitle>
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{
+            name: "",
+            email: "",
+            phoneNumber: "",
+            password: "",
+            userRole: "rider",
+          }}
           validate={(values) => {
             console.log(values);
           }}
@@ -105,50 +123,68 @@ const Home = () => {
                 }}
               >
                 <TextField
+                  name="name"
                   label="Name"
                   variant="outlined"
                   size="small"
                   error={false}
+                  value="name"
                   style={{
                     marginBottom: "10px",
                   }}
                 />
 
                 <TextField
+                  name="email"
                   label="Email"
                   variant="outlined"
                   size="small"
                   error={false}
+                  value="email"
                   style={{
                     marginBottom: "10px",
                   }}
                 />
 
                 <TextField
+                  name="phoneNumber"
                   label="Phone number"
                   variant="outlined"
                   size="small"
-                  type="number"
+                  value="phoneNumber"
                   style={{
                     marginBottom: "10px",
                   }}
                 />
 
-                <Select>
-                  <Option value="rider">Rider</Option>
+                <Select
+                  label="User role"
+                  value="userRole"
+                  onChange={() => handleChange}
+                  size="small"
+                  name="userRole"
+                >
+                  <MenuItem value="rider">Delivery rider</MenuItem>
                 </Select>
 
-                <input
+                <TextField
                   type="password"
                   name="password"
+                  label="Password"
+                  variant="outlined"
+                  size="small"
+                  value="password"
+                  style={{
+                    marginBottom: "10px",
+                  }}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.password}
                 />
                 {errors.password && touched.password && errors.password}
-                <button type="submit" disabled={isSubmitting}>
+
+                <Button variant="primary" onClick={() => console.log("form")}>
                   Submit
-                </button>
+                </Button>
               </div>
             </form>
           )}
