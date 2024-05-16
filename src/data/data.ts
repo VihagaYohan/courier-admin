@@ -44,7 +44,7 @@ export const menu = [
       {
         id: 1,
         title: "Orders",
-        url: "/",
+        url: "/reports",
         icon: Icons.AssessmentRounded,
       },
     ],

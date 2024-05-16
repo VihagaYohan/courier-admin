@@ -3,3 +3,4 @@ export { default as Home } from "./home/Home";
 export { default as Orders } from "./orders/Orders";
 export { default as Users } from "./users/Users";
 export { default as Types } from "./types/Types";
+export { default as Reports } from "./reports/Reports";

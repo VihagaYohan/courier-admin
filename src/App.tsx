@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 
 // pages
-import { Home, Orders, Users, Login, Types } from "./pages";
+import { Home, Orders, Users, Login, Types, Reports } from "./pages";
 
 // layout
 import { Dashboard } from "./layout";
@@ -47,6 +47,10 @@ function App() {
         {
           path: "/types",
           element: <Types />,
+        },
+        {
+          path: "/reports",
+          element: <Reports />,
         },
       ],
     },
